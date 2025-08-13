@@ -1,7 +1,8 @@
 import { View, Text, TextInput, Image, TouchableOpacity } from "react-native";
-import React from "react";
+import React, { memo } from "react";
 import { icons } from "@/constants";
 import { images } from "@/constants/images";
+import { wp, hp, fs, isTablet } from "@/lib/responsive";
 
 interface SearchBarProps {
   placeholder: string; // Default placeholder text
@@ -11,7 +12,7 @@ interface SearchBarProps {
   onEndEditing?: () => void; // Function triggered when input is submitted
 }
 
-const Search = ({
+const Search = memo(({
   placeholder,
   onPress,
   value,
@@ -19,23 +20,60 @@ const Search = ({
   onEndEditing,
 }: SearchBarProps) => {
   return (
-    <View className="flex-row items-center bg-white rounded-xl h-14 shadow px-2">
+    <View 
+      className="flex-row items-center bg-white rounded-xl shadow px-3"
+      style={{ 
+        height: isTablet() ? hp(7) : hp(6.5),
+        minHeight: 50
+      }}
+    >
       <TextInput
-        className="flex-1 text-base text-black px-2"
+        className="flex-1 text-black px-2"
+        style={{ fontSize: fs(14) }}
         placeholder={placeholder}
         value={value}
         onChangeText={onChangeText}
         onEndEditing={onEndEditing}
         onFocus={onPress} // Triggers on press
-        placeholderTextColor="gray"
+        placeholderTextColor="#999"
       />
-      <Image source={icons.search} className="w-6 h-6 tint-black mx-2" />
-      <View className="w-px h-6 bg-gray-200 mx-2" />
-      <View className="rounded-full p-1 mx-2">
-        <Image source={images.microphone} className="w-5 h-5" style={{ tintColor: '#FF6600' }} />
-      </View>
+      <Image 
+        source={icons.search} 
+        className="tint-black mx-2" 
+        style={{ 
+          width: wp(6), 
+          height: wp(6) 
+        }} 
+      />
+      <View 
+        className="bg-gray-200 mx-2" 
+        style={{ 
+          width: 1, 
+          height: wp(6) 
+        }} 
+      />
+      <TouchableOpacity 
+        className="rounded-full p-1 mx-1"
+        style={{
+          width: wp(8),
+          height: wp(8),
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}
+      >
+        <Image 
+          source={images.microphone} 
+          style={{ 
+            width: wp(5), 
+            height: wp(5),
+            tintColor: '#FF6600' 
+          }} 
+        />
+      </TouchableOpacity>
     </View>
   );
-};
+});
+
+Search.displayName = 'Search';
 
 export default Search;

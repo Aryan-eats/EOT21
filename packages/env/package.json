@@ -1,0 +1,38 @@
+{
+  "name": "@eatontime/env",
+  "version": "0.1.0",
+  "description": "Environment configuration utilities for EatOnTime projects",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "lint": "eslint src --ext .ts",
+    "lint:fix": "eslint src --ext .ts --fix",
+    "clean": "rimraf dist",
+    "prebuild": "npm run clean",
+    "postinstall": "npm run build"
+  },
+  "keywords": [
+    "env",
+    "environment",
+    "config"
+  ],
+  "author": "EOT21 Team",
+  "license": "MIT",
+  "dependencies": {
+    "@eatontime/contracts": "workspace:*",
+    "dotenv": "^16.4.7",
+    "dotenv-safe": "^8.2.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/dotenv-safe": "^8.1.5",
+    "@types/node": "^20.9.1",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.5.3"
+  }
+}

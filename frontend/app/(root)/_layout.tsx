@@ -27,6 +27,18 @@ const Layout = () => {
           headerShown: false,
         }}
       />
+      <Stack.Screen
+        name="payment"
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="order-tracking"
+        options={{
+          headerShown: false,
+        }}
+      />
     </Stack>
   );
 }

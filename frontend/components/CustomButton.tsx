@@ -1,5 +1,8 @@
 import { ButtonProps } from "@/types/type";
-import { TouchableOpacity, Text } from "react-native";
+import { TouchableOpacity, Text, ActivityIndicator } from "react-native";
+import { memo } from "react";
+import { wp, hp, fs, isTablet } from "@/lib/responsive";
+
 const getBgVariantStyle = (variant: ButtonProps["bgVariant"]) => {
   switch (variant) {
     case "secondary":
@@ -28,8 +31,9 @@ const getTextVariantStyle = (variant: ButtonProps["textVariant"]) => {
       default:
         return "text-white";
     }
-  };
-const CustomButton = ({
+};
+
+const CustomButton = memo(({
   onPress,
   title,
   bgVariant = "primary",
@@ -37,19 +41,44 @@ const CustomButton = ({
   IconLeft,
   IconRight,
   className,
+  disabled = false,
+  loading = false,
   ...props
-}: ButtonProps) => (
+}: ButtonProps & { disabled?: boolean; loading?: boolean }) => (
   <TouchableOpacity
     onPress={onPress}
-    className={`w-full rounded-full p-3 flex flex-row justify-center items-center shadow-md shadow-neutral-400/70 ${getBgVariantStyle(
+    disabled={disabled || loading}
+    className={`w-full rounded-full flex flex-row justify-center items-center shadow-md shadow-neutral-400/70 ${getBgVariantStyle(
       bgVariant
-    )} ${className}`}
+    )} ${disabled || loading ? 'opacity-50' : ''} ${className}`}
+    style={{
+      paddingVertical: isTablet() ? hp(2) : hp(1.5),
+      paddingHorizontal: wp(4),
+      minHeight: isTablet() ? hp(7) : hp(6),
+    }}
+    activeOpacity={disabled || loading ? 1 : 0.7}
     {...props}
   >
-    {IconLeft && <IconLeft />}
-    <Text className={`text-lg font-bold ${getTextVariantStyle(textVariant)}`}>{title}</Text>
-    {IconRight && <IconRight />}
+    {loading ? (
+      <ActivityIndicator 
+        size="small" 
+        color={textVariant === "primary" ? "#000" : "#fff"} 
+      />
+    ) : (
+      <>
+        {IconLeft && <IconLeft />}
+        <Text 
+          className={`font-bold ${getTextVariantStyle(textVariant)}`}
+          style={{ fontSize: fs(16) }}
+        >
+          {title}
+        </Text>
+        {IconRight && <IconRight />}
+      </>
+    )}
   </TouchableOpacity>
-);
+));
+
+CustomButton.displayName = 'CustomButton';
 
 export default CustomButton;

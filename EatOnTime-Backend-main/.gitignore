@@ -1,0 +1,9 @@
+#node modules
+node_modules
+
+#env
+.env
+.env.*.local
+
+#temp uploads
+public/uploads

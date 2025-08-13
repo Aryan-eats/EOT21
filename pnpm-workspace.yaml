@@ -1,0 +1,8 @@
+packages:
+  - "packages/*"
+  - "AdminDash"
+  - "Delivery"
+  - "EatOnTime-Backend-main"
+  - "frontend"
+  - "Onboarding"
+  - "RestDash"

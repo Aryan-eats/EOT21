@@ -1,0 +1,60 @@
+{
+  "name": "eatontime",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Full‑stack multi‑tenant food delivery ecosystem",
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "scripts": {
+    "prepare": "husky install",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "postinstall": "pnpm run -r --parallel postinstall",
+    "update-scripts": "node scripts/update-scripts.js",
+    "dev:backend": "pnpm --filter=\"EatOnTime-Backend-main\" run dev",
+    "dev:frontend": "pnpm --filter=\"frontend\" run start",
+    "dev:admin": "pnpm --filter=\"AdminDash\" run dev",
+    "dev:restaurant": "pnpm --filter=\"RestDash\" run dev",
+    "dev:delivery": "pnpm --filter=\"deliveryapp\" run start",
+    "dev:onboarding": "pnpm --filter=\"Onboarding\" run start",
+    "build:contracts": "pnpm --filter=\"@eatontime/contracts\" run build",
+    "build:env": "pnpm --filter=\"@eatontime/env\" run build"
+  },
+  "keywords": [
+    "food-delivery",
+    "nodejs",
+    "react",
+    "react-native",
+    "typescript"
+  ],
+  "author": "EOT21 Team",
+  "license": "MIT",
+  "devDependencies": {
+    "@commitlint/cli": "^18.6.0",
+    "@commitlint/config-conventional": "^18.6.0",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-prettier": "^5.1.3",
+    "eslint-plugin-react": "^7.34.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^15.2.2",
+    "prettier": "^3.2.5"
+  },
+  "pnpm": {
+    "peerDependencyRules": {
+      "allowAny": [
+        "react",
+        "react-dom",
+        "react-native"
+      ]
+    }
+  }
+}
